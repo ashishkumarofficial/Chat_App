@@ -5,7 +5,7 @@ import messagesRoutes from "./router/messages.routes.js";
 import userRoutes from "./router/user.routes.js"; 
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import cookieParser from "cookie-parser";
-import cors from "cors"; // Importing CORS for handling cross-origin requests
+// import cors from "cors"; // Importing CORS for handling cross-origin requests
 import { app, server } from "./Socket/socket.js";
 import path from "path"  
 
@@ -29,10 +29,10 @@ app.use("/api/messages",messagesRoutes);
 app.use("/api/users",userRoutes);
 
   app.use(express.static(path.join(_dirname,"/Frontend/dist")));
-
-app.get("*",(req,res)=>{
-       res.sendFile(path.join(_dirname,"Frontend","dist","index.html"));
-})
+  
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(_dirname, "Frontend", "dist", "index.html"));
+});
 
 
 server.listen(PORT, () => {
