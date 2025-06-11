@@ -3,7 +3,8 @@ import User from "../models/user.model.js";
 
 const isAuthenticated = async (req, res, next) => {
     try {
-    const token = req.cookies.token ;
+    const token = req.cookies.jwt;
+    // console.log(token)
     if(!token){
         return res.status(401).json({ message: "User not authenticated" });
     }
@@ -12,7 +13,7 @@ const isAuthenticated = async (req, res, next) => {
         return res.status(401).json({ message: "Invalid token" });
     }
 
-    console.log("Token:", token);
+    // console.log("Token:", token);
     
     const user = await User.findById(decodedToken.userId).select("-password");
     if(!user){
